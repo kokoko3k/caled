@@ -32,7 +32,7 @@ Mandatory requirements:
 
 Compiling it:
 -----------------------------
-After you installed gambas 3, just checkout and compile xt7 that way:
+After you installed gambas 3, just checkout and compile that way:
 
 # git clone https://github.com/kokoko3k/caled.git
 # cd caled/
