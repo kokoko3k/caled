@@ -27,7 +27,7 @@ Mandatory requirements:
       gb.qt4
       gb.form
   * Qt4
-  * dispwin
+  * dispwin (included in argyllcms)
 
 
 Compiling it:
