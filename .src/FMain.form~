@@ -1,0 +1,175 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,82,81)
+  Background = Color.Background
+  Text = ("Gaussian")
+  Arrangement = Arrange.Vertical
+  { Panel1 Panel
+    MoveScaled(1,2,76,65)
+    Tracking = True
+    Expand = True
+    Arrangement = Arrange.Horizontal
+    { DrawingArea1 DrawingArea
+      MoveScaled(3,4,72,58)
+      Tracking = True
+      Expand = True
+      Focus = True
+      { RMark PictureBox
+        MoveScaled(9,10,1.1429,1.1429)
+        Background = &HFF0000&
+      }
+      { BMark PictureBox
+        MoveScaled(14,17,1.1429,1.1429)
+        Background = &H0000FF&
+      }
+      { GMark PictureBox
+        MoveScaled(18,27,1.1429,1.1429)
+        Background = &H00FF00&
+      }
+    }
+    { BackPicture PictureBox
+      MoveScaled(12,32,16,11)
+      Ignore = True
+      Picture = Picture["BWH.png"]
+      Stretch = True
+    }
+  }
+  { HBox1 HBox
+    MoveScaled(2,70,74,10)
+    Background = &H000000&
+    AutoResize = True
+    Margin = True
+    { Panel4 Panel
+      MoveScaled(0,0,34,9)
+      Arrangement = Arrange.Vertical
+      { ComboBox1 ComboBox
+        MoveScaled(0,0,33,3)
+        Background = &HFFFFFF&
+        Foreground = &H000000&
+        ReadOnly = True
+        List = [("Gaussian"), ("Wide Gaussian"), ("Translate"), ("Derivative"), ("Gamma")]
+        Text = ("Gaussian")
+      }
+      { Panel5 Panel
+        MoveScaled(0,3,33,6)
+        Arrangement = Arrange.Horizontal
+        { Button1 Button
+          MoveScaled(0,0,6,6)
+          Background = &H000000&
+          ToolTip = ("Invert")
+          Expand = True
+          Picture = Picture["1414522570_invert-colors-512.png"]
+          Border = False
+        }
+        { ButtonUndo Button
+          MoveScaled(6,0,6,6)
+          Background = &H000000&
+          ToolTip = ("Undo")
+          Expand = True
+          Picture = Picture["icon:/32/undo"]
+          Border = False
+        }
+        { ButtonRedo Button
+          MoveScaled(12,0,6,6)
+          Background = &H000000&
+          ToolTip = ("Redo")
+          Expand = True
+          Picture = Picture["icon:/32/redo"]
+          Border = False
+        }
+        { ButtonLoad Button
+          MoveScaled(18,0,6,6)
+          Background = &H000000&
+          ToolTip = ("Load")
+          Expand = True
+          Picture = Picture["icon:/32/open"]
+          Border = False
+        }
+        { ButtonSave Button
+          MoveScaled(24,0,6,6)
+          Background = &H000000&
+          ToolTip = ("Save")
+          Expand = True
+          Picture = Picture["icon:/32/save-as"]
+          Border = False
+        }
+      }
+    }
+    { Panel6 Panel
+      MoveScaled(34,0,15,9)
+      { ComboBox2 ComboBox
+        MoveScaled(0,0,14,3)
+        Background = &HFFFFFF&
+        Foreground = &H000000&
+        ReadOnly = True
+        List = [("Display: 1"), ("Display: 2"), ("Display: 3"), ("Display: 4")]
+        Text = ("Display: 1")
+      }
+      { VBox2 VBox
+        MoveScaled(3,3,4,5)
+        Expand = True
+        AutoResize = True
+      }
+    }
+    { VBox1 VBox
+      MoveScaled(50,1,4,5)
+      Expand = True
+      AutoResize = True
+    }
+    { Panel3 Panel
+      MoveScaled(55,0,3,8)
+      Background = &H000000&
+      Arrangement = Arrange.Vertical
+      AutoResize = True
+      { ButtonClear1 Button
+        MoveScaled(0,0,2.2857,3)
+        Font = Font["-2"]
+        Picture = Picture["icon:/16/clear"]
+      }
+      { ButtonClear2 Button
+        MoveScaled(0,2,2.2857,3)
+        Font = Font["-2"]
+        Picture = Picture["icon:/16/clear"]
+      }
+      { ButtonClear3 Button
+        MoveScaled(0,4,2.2857,3)
+        Font = Font["-2"]
+        Picture = Picture["icon:/16/clear"]
+      }
+    }
+    { Panel2 Panel
+      MoveScaled(61,0,12,7)
+      Background = &H000000&
+      Arrangement = Arrange.Vertical
+      AutoResize = True
+      { RCheck CheckBox RGBCheck
+        Name = "RCheck"
+        MoveScaled(0,0,11,1)
+        Font = Font["-2"]
+        Foreground = &HFFFFFF&
+        AutoResize = True
+        Text = ("Red")
+        Value = CheckBox.True
+      }
+      { GCheck CheckBox RGBCheck
+        Name = "GCheck"
+        MoveScaled(0,2,11,2)
+        Font = Font["-2"]
+        Foreground = &HFFFFFF&
+        AutoResize = True
+        Text = ("Green")
+        Value = CheckBox.True
+      }
+      { BCheck CheckBox RGBCheck
+        Name = "BCheck"
+        MoveScaled(0,4,11,1)
+        Font = Font["-2"]
+        Foreground = &HFFFFFF&
+        AutoResize = True
+        Text = ("Blue")
+        Value = CheckBox.True
+      }
+    }
+  }
+}

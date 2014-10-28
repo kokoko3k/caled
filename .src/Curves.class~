@@ -1,0 +1,189 @@
+' Gambas class file
+
+' ' Gambas class file
+' 
+' 
+' 
+' ' Public Sub Curve(h As Float, ByRef pts As Float[], vlpoint As Integer, vhpoint As Integer)
+' ' Dim lpoint As Integer = 50
+' ' Dim hpoint As Integer = 100
+' ' Dim cpoint As Integer = 75
+' ' Dim width As Integer = 200
+' ' 
+' ' Dim w As Integer = 20
+' ' lpoint = CInt(vlpoint / (DrawingArea1.w / 255))
+' ' hpoint = CInt(vhpoint / (DrawingArea1.w / 255))
+' ' 
+' ' cpoint = (lpoint + hpoint) Div 2
+' ' 
+' ' DrawingArea1.refresh
+' ' 'CurveIt(ByRef pts, lpoint, cpoint, hpoint, h, w)
+' ' 
+' ' CurveIt(ByRef pts, lpoint, cpoint, hpoint, h, w)
+' ' DrawingArea1.refresh
+' ' End
+' 
+' 
+' 
+' ' Public Sub CurveIt(ByRef pts As String[], x1 As Integer, x2 As Integer, x3 As Integer, h As Float, w As Integer)
+' '   Dim x, x0, x4 As Integer
+' '   Dim y, y0, y1, y2, y3, y4 As Float
+' '   If x1 < 0 Then x1 = 0
+' '   If x2 < 0 Then x2 = 0
+' '   If x3 < 0 Then x3 = 0
+' '   If x1 > 255 Then x1 = 255
+' '   If x2 > 255 Then x2 = 255
+' '   If x3 > 255 Then x3 = 255
+' '   y1 = pts[x1]
+' '   y2 = pts[x2] + h
+' '   y3 = pts[x3]
+' ' 
+' '  For x = x1 To x3
+' '    y = Curve3(x, x1, y1, x2, y2, x3, y3)
+' '  
+' '    'y = gammacor(x, pts[x], h)
+' '    Debug y
+' '    If y < 0 Then y = 0
+' '    If y > 1 Then y = 1
+' '    pts[x] = y
+' '  Next
+' ' 
+' ' End
+' ' 
+' ' 
+' Public Function Curve3(x As Float, x1 As Float, y1 As Float, x2 As Float, y2 As Float, x3 As Float, y3 As Float) As Float
+'   Return ((((x - x2) * (x - x3)) / ((x1 - x2) * (x1 - x3))) * y1) + ((((x - x1) * (x - x3)) / ((x2 - x1) * (x2 - x3))) * y2) + ((((x - x1) * (x - x2)) / ((x3 - x1) * (x3 - x2))) * y3)
+' End
+' 
+' Public Function Curve5(x As Float, x1 As Float, y1 As Float, x2 As Float, y2 As Float, x3 As Float, y3 As Float, x4 As Float, y4 As Float, x5 As Float, y5 As Float) As Float
+'   Dim y As Float
+'       Y = (((x - x2) * (x - x3) * (x - x4) * (x - x5)) / ((x1 - x2) * (x1 - x3) * (x1 - x4) * (x1 - x5))) * y1
+'    Y = Y + (((x - x1) * (x - x3) * (x - x4) * (x - x5)) / ((x2 - x1) * (x2 - x3) * (x2 - x4) * (x2 - x5))) * y2 
+'    Y = Y + (((x - x1) * (x - x2) * (x - x4) * (x - x5)) / ((x3 - x1) * (x3 - x2) * (x3 - x4) * (x3 - x5))) * y3
+'    Y = Y + (((x - x1) * (x - x2) * (x - x3) * (x - x5)) / ((x4 - x1) * (x4 - x2) * (x4 - x3) * (x4 - x5))) * y4
+'    Y = Y + (((x - x1) * (x - x1) * (x - x3) * (x - x4)) / ((x5 - x1) * (x5 - x1) * (x5 - x3) * (x5 - x4))) * y5
+'   Return Y
+' End
+' 
+' 
+'  Public Function Interpolation(XYList As Float[], ByRef XListOut As Integer[], ByRef YListOut As Float[])
+'   Dim p, j, k As Integer
+'   
+'   Dim m As Integer '= 255 'numero di punti da interpolare
+'   Dim n As Integer 
+'   Dim imgx As Integer = 255 'risoluzione orizzontale grafico
+'   Dim imgy As Integer = 255 ' risoluzione verticale grafico
+'   Dim x, y As Float
+'   Dim Lx As Float
+'   Dim i As Integer
+'   Dim XList As New Integer[]
+'   Dim YList As New Float[]
+' 
+'   For i = 0 To XYList.max
+'     If XYlist[i] <> -1 Then
+'       XList.Add(i)
+'       yList.Add(XYList[i])
+'     Endif
+'   Next
+' 
+'   Debug "-----------------------------"
+'   For i = 0 To XList.Max
+'     Debug XList[i], YList[i]
+'   Next
+'   Debug "-----------------------------"
+' 
+'   n = xList.max 
+'   m = XList[XList.max] - XList[0]
+'   
+'   imgx = m
+'   
+' 
+'   'For p = 0 To m
+'   For p = XList[0] To XList[XList.max]
+'     x = (imgx - 1) * p / (m - 1)
+'     y = 0.0
+'     For j = 0 To n
+'       Lx = 1.0
+'       For k = 0 To n
+'         If k <> j Then
+'           Try Lx = Lx * (x - xList[k]) / (xList[j] - xList[k])
+'           If Error Then Lx = 0
+'         Endif
+'       Next 'k
+'       y = y + yList[j] * Lx  
+'     Next 'j
+'     'If y >= 0 And y <= imgy - 1 Then
+'       XlistOut.add(x)
+'       YlistOut.add(y)
+'     'Endif
+'   Next 'p
+' 
+' End
+' 
+' 
+' Public XYList As Float[]
+' 
+' 
+' 
+' Public Sub DrawingArea1_MouseDrag()
+' Dim mx, my As Integer
+'   Dim XlistOut As New Integer[]
+'   Dim YlistOut As New Float[]
+'   Dim tmplist As New Float[]
+'   Dim XYListSubset As Float[]
+'   Dim i, j1, j2, xmin, xmax As Integer
+'   Dim xlistnew As New Integer[]
+'   Dim ylistnew As New Float[]
+'   
+'   mx = Mouse.X
+'   my = Mouse.y
+'   If Mouse.left Then
+'     LastX = CInt(mx / (DrawingArea1.w / 255))
+'     LastY = 1 - (my / DrawingArea1.h)
+'     XYlist[LastX] = LastY
+'   Endif
+'   
+'   'Dato il punto LastX attuale, prendi al più 2 punti dopo e 2 punti prima, totale 5.
+'         XYListSubset = New Float[256]
+'         XYListSubset.Fill(-1)
+'         XYListSubset[Lastx] = LastY
+'         j1 = 0
+'         For i = LastX + 1 To 255
+'           If XYlist[i] <> -1 Then
+'             XYListSubset[i] = XYlist[i]
+'             j1 = j1 + 1
+'             xmax = i
+'             If j1 = 1 Then Break
+'           Endif
+'         Next
+'         j2 = 0
+' 
+'         For i = (LastX - 1) DownTo 0
+'           If XYlist[i] <> -1 Then
+'             XYListSubset[i] = XYlist[i]
+'             j2 = j2 + 1
+'             xmin = i
+'             If j2 = 1 Then Break
+'           Endif
+'         Next
+'   
+'   For i = 0 To XYListSubset.Max
+'     If XYListSubset[i] <> -1 Then
+'       xlistnew.Add(i)
+'       ylistnew.Add(XYListSubset[i])
+'     Endif
+'   Next
+' 
+' 
+'   For i = xmin To xmax
+'     'rpts[i] = Curve5(i, xlistnew[0], ylistnew[0], xlistnew[1], ylistnew[1], xlistnew[2], ylistnew[2], xlistnew[3], ylistnew[3], xlistnew[4], ylistnew[4])
+'     rpts[i] = Curve3(i, xlistnew[0], ylistnew[0], xlistnew[1], ylistnew[1], xlistnew[2], ylistnew[2])
+'     
+'   Next
+'  
+'  
+'   DrawingArea1.Refresh
+'   XYList[LastX] = -1
+'    WriteCalFile("/tmp/calfile")
+'    ApplyCalFile("/tmp/calfile")
+'End
