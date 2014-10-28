@@ -6,10 +6,6 @@ cheap notebooks displays.
 
 It is all up to you and your eyes!
 
-Caled is written and requires (the latest) Gambas3:
-http://gambas.sourceforge.net/en/main.html
-
-
 Usage is preatty simple, just drag the cursors with the mouse.
 Up/Down:    will modify the brightness
 Left/right: will change the range of the operator
@@ -20,7 +16,8 @@ You can load and save different calibration files.
 To apply them, just use dispwin <calibration file>
 
 
-
+Caled is written and requires (the latest) Gambas3:
+http://gambas.sourceforge.net/en/main.html
 
 Mandatory requirements:
 -----------------------------
