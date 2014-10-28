@@ -1,9 +1,12 @@
-caled
-=====
+Caled is a visual editor for LUT calibration files that uses dispwin to upload and download the LUTs
+It will display a simple black to white gradient,
+your task is to modify the r,g,b curves until you will see a perfect gray gradient without color casts.
+It doesn't expect to be a replacement for hardware calibrators, but i've had success in calibrating several
+cheap notebooks displays.
 
-caled is a visual editor for LUT calibration files, it uses dispwin to upload and download the LUTs
+It is all up to you and your eyes!
 
-It is written and requires (the latest) Gambas3:
+Caled is written and requires (the latest) Gambas3:
 http://gambas.sourceforge.net/en/main.html
 
 
