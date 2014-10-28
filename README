@@ -2,3 +2,40 @@ caled
 =====
 
 caled is a visual editor for LUT calibration files, it uses dispwin to upload and download the LUTs
+
+It is written and requires (the latest) Gambas3:
+http://gambas.sourceforge.net/en/main.html
+
+
+Usage is preatty simple, just drag the cursors with the mouse.
+Up/Down:    will modify the brightness
+Left/right: will change the range of the operator
+The operators can be selected by the dropdown combobox in the bottom/left corner.
+The display combobox will indicate which monitor you are changing.
+
+You can load and save different calibration files.
+To apply them, just use dispwin <calibration file>
+
+
+
+
+Mandatory requirements:
+-----------------------------
+  * Gambas 3 (usually the very latest version)
+      gb
+      gb.image
+      gb.qt4
+      gb.form
+  * Qt4
+  * dispwin
+
+
+Compiling it:
+-----------------------------
+After you installed gambas 3, just checkout and compile xt7 that way:
+
+# git clone https://github.com/kokoko3k/caled.git
+# cd caled/
+# /path/to/gambas/binaries/gbc3 -e -a -g -t -p -m
+# /path/to/gambas/binaries/gba3
+# ./caled.gambas
