@@ -3,7 +3,7 @@
 { Form Form
   MoveScaled(0,0,82,81)
   Background = Color.Background
-  Text = ("Gaussian")
+  Text = ("Caled")
   Arrangement = Arrange.Vertical
   { Panel1 Panel
     MoveScaled(1,2,76,65)
@@ -37,7 +37,7 @@
   }
   { HBox1 HBox
     MoveScaled(2,70,74,10)
-    Background = &H000000&
+    Background = &H9F9F9F&
     AutoResize = True
     Margin = True
     { Panel4 Panel
@@ -67,7 +67,7 @@
           Background = &H000000&
           ToolTip = ("Undo")
           Expand = True
-          Picture = Picture["icon:/32/undo"]
+          Picture = Picture["edit-undo.png"]
           Border = False
         }
         { ButtonRedo Button
@@ -75,7 +75,7 @@
           Background = &H000000&
           ToolTip = ("Redo")
           Expand = True
-          Picture = Picture["icon:/32/redo"]
+          Picture = Picture["edit-redo.png"]
           Border = False
         }
         { ButtonLoad Button
@@ -83,7 +83,7 @@
           Background = &H000000&
           ToolTip = ("Load")
           Expand = True
-          Picture = Picture["icon:/32/open"]
+          Picture = Picture["document-open.png"]
           Border = False
         }
         { ButtonSave Button
@@ -91,7 +91,7 @@
           Background = &H000000&
           ToolTip = ("Save")
           Expand = True
-          Picture = Picture["icon:/32/save-as"]
+          Picture = Picture["document-save-as.png"]
           Border = False
         }
       }
