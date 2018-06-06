@@ -69,7 +69,7 @@ Public Sub ParseCalFile(calfile As String)
       If aLine = "BEGIN_DATA" Then DataStart = True
     Endif
   Next 'aLine
-  Stop
+
 End
 
 
@@ -80,8 +80,9 @@ Public dAction As String = "RGBCurves"
 
 Public Sub DrawingArea1_Draw()
   Paint.Begin(DrawingArea1)
-  
-    'Paint.Scale((DrawingArea1.w / 255), (DrawingArea1.h / 1))
+    Paint.brush = Paint.LinearGradient(0, 0, drawingarea1.w, 0, [Color.black, Color.white], [0, 1, 0, 1])
+    Paint.Rectangle(0, 0, drawingarea1.w, drawingarea1.h)
+    Paint.Fill()
     Paint.Scale((DrawingArea1.w / Rpts.max), (DrawingArea1.h / 1))
     Select dAction 
       Case "RGBCurves"
@@ -93,9 +94,7 @@ Public Sub DrawingArea1_Draw()
     End Select
   Paint.end
   UpdateMarks()
-
 End
-
 
 
 
@@ -336,7 +335,6 @@ End
 '   
 '   
     DrawingArea1.Refresh
-      Stop
       WriteCalFile("/tmp/calfile")
       ApplyCalFile("/tmp/calfile")
   Endif

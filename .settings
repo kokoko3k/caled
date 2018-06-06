@@ -109,9 +109,8 @@ Geometry=[271,0,210,210]
 [OpenFile]
 Active=1
 File[1]=".src/FMain.form"
-File[2]=".src/FMain.class:81.13"
-File[3]="lutfile.cal:18.0"
-Count=3
+File[2]=".src/FMain.class:0.71"
+Count=2
 
 [Watches]
 Count=0
