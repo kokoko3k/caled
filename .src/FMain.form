@@ -35,7 +35,7 @@
     AutoResize = True
     Margin = True
     { Panel4 Panel
-      MoveScaled(0,0,34,10)
+      MoveScaled(0,0,39,10)
       Arrangement = Arrange.Vertical
       { ComboBox1 ComboBox
         MoveScaled(0,0,33,4)
@@ -45,7 +45,7 @@
         Text = ("Gaussian")
       }
       { Panel5 Panel
-        MoveScaled(0,4,33,6)
+        MoveScaled(0,4,38,6)
         Arrangement = Arrange.Horizontal
         AutoResize = True
         { Button1 Button
@@ -88,10 +88,18 @@
           Picture = Picture["document-save-as.png"]
           Border = False
         }
+        { ButtonSave2 Button
+          MoveScaled(31,0,7,6)
+          Background = &H000000&
+          ToolTip = ("Save")
+          Expand = True
+          Picture = Picture["stock_fullscreen.png"]
+          Border = False
+        }
       }
     }
     { Panel6 Panel
-      MoveScaled(34,0,14,10)
+      MoveScaled(40,0,8,10)
       { ComboBox2 ComboBox
         MoveScaled(0,0,14,4)
         Foreground = &H000000&

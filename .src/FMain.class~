@@ -161,15 +161,6 @@ Public Sub RGBCheck_Click()
   DrawingArea1.Refresh
 End
 
-Public Sub Panel1_Arrange()
-
-  BackPicture.x = BackPicture.Parent.x
-  BackPicture.y = BackPicture.Parent.y
-  BackPicture.w = BackPicture.Parent.w
-  BackPicture.h = BackPicture.Parent.h
-  BackPicture.lower
-
-End
 
 
 Public Function Gaussianpoint(x As Float, omega As Float, m As Float, k As Float) As Float

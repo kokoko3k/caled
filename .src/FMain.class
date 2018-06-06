@@ -162,6 +162,7 @@ Public Sub RGBCheck_Click()
 End
 
 
+
 Public Function Gaussianpoint(x As Float, omega As Float, m As Float, k As Float) As Float
   ' x = 1 / (RADQ(2 * 3.14 * o * o)) * Exp(-1 / k * (((A2 - 5) * (A2 - 5)) / o * o))
 ' omega = inverso altezza picco gaussiana
@@ -445,4 +446,10 @@ Public Sub ButtonSave_Click()
     Try WriteCalFile(Dialog.Path)
     If Error Then Message.Error(("Error saving the cal file"))
   Endif
+End
+
+Public Sub ButtonSave2_Click()
+
+  FMain.FullScreen = Not FMain.FullScreen
+
 End
