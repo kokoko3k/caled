@@ -62,7 +62,7 @@ Geometry=[931,83,210,874]
 Geometry=[44,-3,210,210]
 
 [DebugWindow/caldata]
-Geometry=[44,0,560,636]
+Geometry=[52,0,560,636]
 
 [DebugWindow/color]
 Geometry=[44,-3,210,210]
@@ -74,7 +74,7 @@ Geometry=[44,0,210,210]
 Geometry=[44,-3,210,210]
 
 [DebugWindow/pts]
-Geometry=[44,0,419,490]
+Geometry=[52,0,419,490]
 
 [DebugWindow/rpts]
 Geometry=[44,-3,210,210]
@@ -109,8 +109,9 @@ Geometry=[271,0,210,210]
 [OpenFile]
 Active=1
 File[1]=".src/FMain.form"
-File[2]=".src/FMain.class:0.71"
-Count=2
+File[2]=".src/FMain.class:41.452"
+Count=3
+File[3]="edit-redo.png"
 
 [Watches]
 Count=0

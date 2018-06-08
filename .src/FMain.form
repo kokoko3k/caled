@@ -100,8 +100,10 @@
     }
     { Panel6 Panel
       MoveScaled(40,0,8,10)
+      Arrangement = Arrange.Vertical
+      AutoResize = True
       { ComboBox2 ComboBox
-        MoveScaled(0,0,14,4)
+        MoveScaled(1,1,14,4)
         Foreground = &H000000&
         ReadOnly = True
         List = [("Display: 1"), ("Display: 2"), ("Display: 3"), ("Display: 4")]
