@@ -107,9 +107,9 @@ Geometry=[254,0,210,210]
 Geometry=[271,0,210,210]
 
 [OpenFile]
-Active=1
+Active=2
 File[1]=".src/FMain.form"
-File[2]=".src/FMain.class:41.452"
+File[2]=".src/FMain.class:50.436"
 Count=3
 File[3]="edit-redo.png"
 

@@ -434,6 +434,7 @@ Public Sub Button1_Click()
 End
 
 Public Sub ButtonLoad_Click()
+  If Dialog.path = "" Then Dialog.path = User.home
   If Not (Dialog.openfile()) Then
     ApplyCalFile(Dialog.path)
     ParseCalFile(Dialog.path)

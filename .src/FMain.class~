@@ -447,3 +447,9 @@ Public Sub ButtonSave_Click()
     If Error Then Message.Error(("Error saving the cal file"))
   Endif
 End
+
+Public Sub ButtonSave2_Click()
+
+  FMain.FullScreen = Not FMain.FullScreen
+
+End
