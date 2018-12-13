@@ -74,7 +74,7 @@
         }
         { ButtonLoad Button
           MoveScaled(18,0,7,6)
-          Background = &H000000&
+          Background = &H00FF00&
           ToolTip = ("Load")
           Expand = True
           Picture = Picture["document-open.png"]
@@ -101,12 +101,13 @@
     { Panel6 Panel
       MoveScaled(40,0,8,10)
       Arrangement = Arrange.Vertical
+      AutoResize = True
       { ComboBox2 ComboBox
         MoveScaled(1,1,14,4)
         Foreground = &H000000&
         ReadOnly = True
         List = [("Display: 1"), ("Display: 2"), ("Display: 3"), ("Display: 4")]
-        Text = ("Display: 1")
+        Text = ("Display: 3")
       }
       { VBox2 VBox
         MoveScaled(3,5,4,5)

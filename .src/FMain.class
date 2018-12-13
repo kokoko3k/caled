@@ -306,9 +306,9 @@ End
         If GCheck.value Then Gaussian(gpts, 0, rpts.max, LastX, lastwidth, lastheight)
         If BCheck.value Then Gaussian(bpts, 0, rpts.max, LastX, lastwidth, lastheight)
       Case "Wide Gaussian"
-        If RCheck.value Then Gaussian(rpts, 0, rpts.max, LastX, lastwidth * 10, lastheight)
-        If GCheck.value Then Gaussian(gpts, 0, rpts.max, LastX, lastwidth * 10, lastheight)
-        If BCheck.value Then Gaussian(bpts, 0, rpts.max, LastX, lastwidth * 10, lastheight)
+        If RCheck.value Then Gaussian(rpts, 0, rpts.max, LastX, lastwidth * 300, lastheight)
+        If GCheck.value Then Gaussian(gpts, 0, rpts.max, LastX, lastwidth * 300, lastheight)
+        If BCheck.value Then Gaussian(bpts, 0, rpts.max, LastX, lastwidth * 300, lastheight)
       Case "Translate"
         If RCheck.value Then Translate(rpts, 0, rpts.max, lastheight)
         If GCheck.value Then Translate(gpts, 0, rpts.max, lastheight)
@@ -454,3 +454,18 @@ Public Sub ButtonSave2_Click()
   FMain.FullScreen = Not FMain.FullScreen
 
 End
+
+
+
+
+Public Sub ComboBox2_Click()
+  Dim answer As Integer
+  answer = Message.Question("Read video LUT from selected display?", "yes", "no")
+  If answer = "1" Then 
+    Try Kill "/tmp/calfile"
+    Shell "dispwin -d " & Display() & " -s " & "/tmp/calfile" Wait
+    Try ParseCalFile("/tmp/calfile")
+    SaveUndo()
+  Endif
+End
+

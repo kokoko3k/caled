@@ -74,7 +74,7 @@
         }
         { ButtonLoad Button
           MoveScaled(18,0,7,6)
-          Background = &H000000&
+          Background = &H00FF00&
           ToolTip = ("Load")
           Expand = True
           Picture = Picture["document-open.png"]
