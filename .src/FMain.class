@@ -317,6 +317,10 @@ End
         If RCheck.value Then Derivative(rpts, 0, rpts.max, lastheight)
         If GCheck.value Then Derivative(gpts, 0, rpts.max, lastheight)
         If BCheck.value Then Derivative(bpts, 0, rpts.max, lastheight)
+      Case "Derivative (Inv)"
+        If RCheck.value Then InvDerivative(rpts, 0, rpts.max, lastheight)
+        If GCheck.value Then InvDerivative(gpts, 0, rpts.max, lastheight)
+        If BCheck.value Then InvDerivative(bpts, 0, rpts.max, lastheight)
       Case "Gamma"
         If RCheck.value Then Gamma(rpts, 0, rpts.max, lastheight)
         If GCheck.value Then Gamma(gpts, 0, rpts.max, lastheight)
@@ -398,6 +402,14 @@ Public Sub Derivative(ByRef pts As String[], mmin As Integer, mmax As Integer, h
   Next
 End
 
+Public Sub InvDerivative(ByRef pts As String[], mmin As Integer, mmax As Integer, h As Float)
+  Dim x As Integer
+  For x = mmin To mmax
+    pts[x] = (pts[x] + h) / (1 + h)
+  Next
+End
+
+
 Public Sub Gamma(ByRef pts As String[], mmin As Integer, mmax As Integer, h As Float)
   Dim x As Integer
   Dim newh As Float = - h
@@ -444,6 +456,7 @@ End
 
 Public Sub ButtonSave_Click()
   If Not (Dialog.SaveFile()) Then
+    If Dialog.path = "" Then Dialog.path = User.home
     Try WriteCalFile(Dialog.Path)
     If Error Then Message.Error(("Error saving the cal file"))
   Endif

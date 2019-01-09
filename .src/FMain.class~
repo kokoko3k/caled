@@ -317,6 +317,10 @@ End
         If RCheck.value Then Derivative(rpts, 0, rpts.max, lastheight)
         If GCheck.value Then Derivative(gpts, 0, rpts.max, lastheight)
         If BCheck.value Then Derivative(bpts, 0, rpts.max, lastheight)
+      Case "Derivative (Inv)"
+        If RCheck.value Then InvDerivative(rpts, 0, rpts.max, lastheight)
+        If GCheck.value Then InvDerivative(gpts, 0, rpts.max, lastheight)
+        If BCheck.value Then InvDerivative(bpts, 0, rpts.max, lastheight)
       Case "Gamma"
         If RCheck.value Then Gamma(rpts, 0, rpts.max, lastheight)
         If GCheck.value Then Gamma(gpts, 0, rpts.max, lastheight)
@@ -398,6 +402,14 @@ Public Sub Derivative(ByRef pts As String[], mmin As Integer, mmax As Integer, h
   Next
 End
 
+Public Sub InvDerivative(ByRef pts As String[], mmin As Integer, mmax As Integer, h As Float)
+  Dim x As Integer
+  For x = mmin To mmax
+    pts[x] = (pts[x] + h) / (1 + h)
+  Next
+End
+
+
 Public Sub Gamma(ByRef pts As String[], mmin As Integer, mmax As Integer, h As Float)
   Dim x As Integer
   Dim newh As Float = - h
@@ -462,8 +474,9 @@ Public Sub ComboBox2_Click()
   Dim answer As Integer
   answer = Message.Question("Read video LUT from selected display?", "yes", "no")
   If answer = "1" Then 
+    Try Kill "/tmp/calfile"
     Shell "dispwin -d " & Display() & " -s " & "/tmp/calfile" Wait
-    ParseCalFile("/tmp/calfile")
+    Try ParseCalFile("/tmp/calfile")
     SaveUndo()
   Endif
 End

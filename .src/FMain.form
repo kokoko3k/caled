@@ -41,7 +41,7 @@
         MoveScaled(0,0,33,4)
         Foreground = &H000000&
         ReadOnly = True
-        List = [("Gaussian"), ("Wide Gaussian"), ("Translate"), ("Derivative"), ("Gamma")]
+        List = [("Gaussian"), ("Wide Gaussian"), ("Translate"), ("Derivative"), ("Derivative (Inv)"), ("Gamma")]
         Text = ("Gaussian")
       }
       { Panel5 Panel
