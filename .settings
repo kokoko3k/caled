@@ -1,6 +1,3 @@
-[Bookmarks]
-FMain=[]
-
 [Breakpoints]
 Count=0
 
@@ -112,7 +109,7 @@ Geometry=[271,0,210,210]
 [OpenFile]
 Active=2
 File[1]=".src/FMain.form"
-File[2]=".src/FMain.class:76.310"
+File[2]=".src/FMain.class:0.469"
 Count=3
 File[3]="edit-redo.png"
 

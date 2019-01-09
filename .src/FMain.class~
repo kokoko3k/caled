@@ -455,6 +455,7 @@ Public Sub ButtonLoad_Click()
 End
 
 Public Sub ButtonSave_Click()
+  If Dialog.path = "" Then Dialog.path = User.home
   If Not (Dialog.SaveFile()) Then
     Try WriteCalFile(Dialog.Path)
     If Error Then Message.Error(("Error saving the cal file"))
