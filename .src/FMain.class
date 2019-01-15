@@ -86,9 +86,10 @@ Public Sub DrawingArea1_Draw()
     Paint.Scale((DrawingArea1.w / Rpts.max), (DrawingArea1.h / 1))
     Select dAction 
       Case "RGBCurves"
-        If RCheck.value Then DrawCurve(Rpts, Color.red)
-        If GCheck.value Then DrawCurve(Gpts, Color.green)
-        If BCheck.value Then DrawCurve(Bpts, Color.blue)
+        Debug ButtonHideG.value 
+        If RCheck.value And ButtonHideR.value Then DrawCurve(Rpts, Color.red)
+        If GCheck.value And ButtonHideG.value Then DrawCurve(Gpts, Color.green)
+        If BCheck.value And ButtonHideB.value Then DrawCurve(Bpts, Color.blue)
       Case Else
         Debug "No dAction" & dAction
     End Select
@@ -483,3 +484,9 @@ Public Sub ComboBox2_Click()
   Endif
 End
 
+
+Public Sub buttonshide_Click()
+
+  drawingarea1.Refresh
+
+End

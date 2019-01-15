@@ -7,6 +7,9 @@ Count=0
 [DebugWindow/Color]
 Geometry=[44,-3,210,210]
 
+[DebugWindow/Dialog]
+Geometry=[52,0,224,280]
+
 [DebugWindow/DrawingArea1]
 Geometry=[44,-3,210,210]
 
@@ -109,7 +112,7 @@ Geometry=[271,0,210,210]
 [OpenFile]
 Active=2
 File[1]=".src/FMain.form"
-File[2]=".src/FMain.class:0.469"
+File[2]=".src/FMain.class:87.82"
 Count=3
 File[3]="edit-redo.png"
 

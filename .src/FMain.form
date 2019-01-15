@@ -1,7 +1,7 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,82,81)
+  MoveScaled(0,0,86,84)
   Background = Color.Background
   Text = ("Caled")
   Arrangement = Arrange.Vertical
@@ -30,7 +30,7 @@
     }
   }
   { HBox1 HBox
-    MoveScaled(2,70,74,11)
+    MoveScaled(2,70,81,11)
     Background = &H000000&
     AutoResize = True
     Margin = True
@@ -38,7 +38,7 @@
       MoveScaled(0,0,39,10)
       Arrangement = Arrange.Vertical
       { ComboBox1 ComboBox
-        MoveScaled(0,0,33,4)
+        MoveScaled(0,0,27,4)
         Foreground = &H000000&
         ReadOnly = True
         List = [("Gaussian"), ("Wide Gaussian"), ("Translate"), ("Derivative"), ("Derivative (Inv)"), ("Gamma")]
@@ -57,7 +57,7 @@
           Border = False
         }
         { ButtonUndo Button
-          MoveScaled(7,0,7,6)
+          MoveScaled(5,0,7,6)
           Background = &H000000&
           ToolTip = ("Undo")
           Expand = True
@@ -65,7 +65,7 @@
           Border = False
         }
         { ButtonRedo Button
-          MoveScaled(12,0,7,6)
+          MoveScaled(10,0,7,6)
           Background = &H000000&
           ToolTip = ("Redo")
           Expand = True
@@ -73,7 +73,7 @@
           Border = False
         }
         { ButtonLoad Button
-          MoveScaled(18,0,7,6)
+          MoveScaled(15,0,7,6)
           Background = &H00FF00&
           ToolTip = ("Load")
           Expand = True
@@ -81,7 +81,7 @@
           Border = False
         }
         { ButtonSave Button
-          MoveScaled(25,0,7,6)
+          MoveScaled(21,0,7,6)
           Background = &H000000&
           ToolTip = ("Save")
           Expand = True
@@ -89,7 +89,7 @@
           Border = False
         }
         { ButtonSave2 Button
-          MoveScaled(31,0,7,6)
+          MoveScaled(27,0,7,6)
           Background = &H000000&
           ToolTip = ("Save")
           Expand = True
@@ -103,14 +103,14 @@
       Arrangement = Arrange.Vertical
       AutoResize = True
       { ComboBox2 ComboBox
-        MoveScaled(1,1,14,4)
+        MoveScaled(0,0,14,4)
         Foreground = &H000000&
         ReadOnly = True
         List = [("Display: 1"), ("Display: 2"), ("Display: 3"), ("Display: 4")]
         Text = ("Display: 1")
       }
       { VBox2 VBox
-        MoveScaled(3,5,4,5)
+        MoveScaled(5,5,4,5)
         Expand = True
         AutoResize = True
       }
@@ -120,64 +120,90 @@
       Expand = True
     }
     { Panel2 Panel
-      MoveScaled(52,0,21,10)
+      MoveScaled(52,0,27,10)
       Background = Color.Black
       Arrangement = Arrange.Vertical
       AutoResize = True
       { HBox2 HBox
-        MoveScaled(0,0,20,3)
+        MoveScaled(2,0,23,3)
         Background = Color.Black
         AutoResize = True
-        { ButtonClear1 Button
+        { ButtonHideR CheckBox buttonshide
+          Name = "ButtonHideR"
           MoveScaled(0,0,3,3)
+          Font = Font["-2"]
+          ToolTip = ("Show/hide")
+          AutoResize = True
+          Value = CheckBox.True
+        }
+        { ButtonClear1 Button
+          MoveScaled(6,0,3,3)
           Font = Font["-2"]
           AutoResize = True
           Picture = Picture["icon:/16/clear"]
         }
         { RCheck CheckBox RGBCheck
           Name = "RCheck"
-          MoveScaled(3,0,11,1)
+          MoveScaled(10,0,11,1)
           Font = Font["Bold,-2"]
           Foreground = &HFF0000&
+          ToolTip = ("Enable/Disable ")
           AutoResize = True
           Text = ("Red")
           Value = CheckBox.True
         }
       }
       { HBox3 HBox
-        MoveScaled(0,3,20,3)
+        MoveScaled(2,3,23,3)
         Background = &H000000&
         AutoResize = True
-        { ButtonClear2 Button
+        { ButtonHideG CheckBox buttonshide
+          Name = "ButtonHideG"
           MoveScaled(0,0,3,3)
+          Font = Font["-2"]
+          ToolTip = ("Show/hide")
+          Value = CheckBox.True
+        }
+        { ButtonClear2 Button
+          MoveScaled(6,0,3,3)
           Font = Font["-2"]
           AutoResize = True
           Picture = Picture["icon:/16/clear"]
         }
         { GCheck CheckBox RGBCheck
           Name = "GCheck"
-          MoveScaled(3,0,11,2)
+          MoveScaled(10,0,11,2)
           Font = Font["Bold,-2"]
           Foreground = &H00FF00&
+          ToolTip = ("Enable/Disable ")
           AutoResize = True
           Text = ("Green")
           Value = CheckBox.True
         }
       }
       { HBox4 HBox
-        MoveScaled(0,6,20,3)
+        MoveScaled(2,6,23,3)
         AutoResize = True
-        { ButtonClear3 Button
+        { ButtonHideB CheckBox buttonshide
+          Name = "ButtonHideB"
           MoveScaled(0,0,3,3)
+          Font = Font["-2"]
+          ToolTip = ("Show/hide")
+          AutoResize = True
+          Value = CheckBox.True
+        }
+        { ButtonClear3 Button
+          MoveScaled(6,0,3,3)
           Font = Font["-2"]
           AutoResize = True
           Picture = Picture["icon:/16/clear"]
         }
         { BCheck CheckBox RGBCheck
           Name = "BCheck"
-          MoveScaled(3,0,11,1)
+          MoveScaled(10,0,11,1)
           Font = Font["Bold,-2"]
           Foreground = &H0000FF&
+          ToolTip = ("Enable/Disable ")
           AutoResize = True
           Text = ("Blue")
           Value = CheckBox.True
