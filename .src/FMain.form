@@ -11,21 +11,21 @@
     Expand = True
     Arrangement = Arrange.Horizontal
     { DrawingArea1 DrawingArea
-      MoveScaled(3,4,72,58)
+      MoveScaled(4,5,72,58)
       Tracking = True
       Expand = True
       Focus = True
       { RMark PictureBox
         MoveScaled(9,10,1.1429,1.1429)
-        Background = &HFF0000&
+        Background = &H80FF0000&
       }
       { BMark PictureBox
         MoveScaled(14,17,1.1429,1.1429)
-        Background = &H0000FF&
+        Background = &H800000FF&
       }
       { GMark PictureBox
         MoveScaled(18,27,1.1429,1.1429)
-        Background = &H00FF00&
+        Background = &H8000FF00&
       }
     }
   }
@@ -89,12 +89,16 @@
           Border = False
         }
         { ButtonSave2 Button
-          MoveScaled(27,0,7,6)
+          MoveScaled(26,0,7,6)
           Background = &H000000&
           ToolTip = ("Save")
           Expand = True
           Picture = Picture["stock_fullscreen.png"]
           Border = False
+        }
+        { Button2 Button
+          MoveScaled(32,1,5,5)
+          Picture = Picture["icon:/16/keyboard"]
         }
       }
     }
@@ -146,7 +150,7 @@
           Name = "RCheck"
           MoveScaled(10,0,11,1)
           Font = Font["Bold,-2"]
-          Foreground = &HFF0000&
+          Foreground = &HFFE1E1&
           ToolTip = ("Enable/Disable ")
           AutoResize = True
           Text = ("Red")
@@ -174,7 +178,7 @@
           Name = "GCheck"
           MoveScaled(10,0,11,2)
           Font = Font["Bold,-2"]
-          Foreground = &H00FF00&
+          Foreground = &HE1FFE1&
           ToolTip = ("Enable/Disable ")
           AutoResize = True
           Text = ("Green")
@@ -202,7 +206,7 @@
           Name = "BCheck"
           MoveScaled(10,0,11,1)
           Font = Font["Bold,-2"]
-          Foreground = &H0000FF&
+          Foreground = &HE1E1FF&
           ToolTip = ("Enable/Disable ")
           AutoResize = True
           Text = ("Blue")

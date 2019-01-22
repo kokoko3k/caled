@@ -13,6 +13,9 @@ Geometry=[52,0,224,280]
 [DebugWindow/DrawingArea1]
 Geometry=[44,-3,210,210]
 
+[DebugWindow/FvalueEdit]
+Geometry=[1920,0,224,838]
+
 [DebugWindow/Me]
 Geometry=[44,-3,210,210]
 
@@ -77,10 +80,10 @@ Geometry=[44,0,210,210]
 Geometry=[44,-3,210,210]
 
 [DebugWindow/pts]
-Geometry=[52,0,419,490]
+Geometry=[214,168,419,490]
 
 [DebugWindow/rpts]
-Geometry=[44,-3,210,210]
+Geometry=[52,0,224,280]
 
 [DebugWindow/rpts.Copy()]
 Geometry=[44,-3,210,210]
@@ -110,11 +113,14 @@ Geometry=[254,0,210,210]
 Geometry=[271,0,210,210]
 
 [OpenFile]
-Active=2
+Active=5
 File[1]=".src/FMain.form"
-File[2]=".src/FMain.class:87.82"
-Count=3
+File[2]=".src/FMain.class:0.299"
+Count=6
 File[3]="edit-redo.png"
+File[4]="caled-git/PKGBUILD:0.0"
+File[5]=".src/Form1.form"
+File[6]=".src/Form1.class:40.17"
 
 [Watches]
 Count=0

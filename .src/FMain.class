@@ -10,7 +10,7 @@ Public OLDRpts As String[]
 Public OLDGpts As String[]
 Public OLDBpts As String[]
 Public UndoRedo As String[]
-
+Public lastaction As String
 
 Public Sub WriteCalFile(calfile As String)
   Dim Caldata As String
@@ -80,24 +80,41 @@ Public dAction As String = "RGBCurves"
 
 Public Sub DrawingArea1_Draw()
   Paint.Begin(DrawingArea1)
-    Paint.brush = Paint.LinearGradient(0, 0, drawingarea1.w, 0, [Color.black, Color.white], [0, 1, 0, 1])
-    Paint.Rectangle(0, 0, drawingarea1.w, drawingarea1.h)
-    Paint.Fill()
+    drawgradient()
+    ' Paint.brush = Paint.LinearGradient(0, 0, drawingarea1.w, 0, [Color.black, Color.white], [0, 1, 0, 1])
+    ' Paint.Rectangle(0, 0, drawingarea1.w, drawingarea1.h)
+    ' Paint.Fill()
     Paint.Scale((DrawingArea1.w / Rpts.max), (DrawingArea1.h / 1))
     Select dAction 
       Case "RGBCurves"
-        Debug ButtonHideG.value 
         If RCheck.value And ButtonHideR.value Then DrawCurve(Rpts, Color.red)
         If GCheck.value And ButtonHideG.value Then DrawCurve(Gpts, Color.green)
         If BCheck.value And ButtonHideB.value Then DrawCurve(Bpts, Color.blue)
       Case Else
         Debug "No dAction" & dAction
     End Select
-  Paint.end
+   Paint.end
   UpdateMarks()
 End
 
 
+Public shades As Integer = 256
+Public Sub drawgradient()
+  Dim i As Integer = 0
+  Dim iStep As Integer = 256 Div shades
+  Paint.Begin(DrawingArea1)
+  Paint.Scale((DrawingArea1.w / 255), (DrawingArea1.h / 1))
+  For i = 0 To 255 Step iStep
+    Paint.AntiAlias = False
+     Paint.brush = Paint.Color(Color.RGB(i, i, i))
+     Paint.LineWidth = istep * 2
+     Paint.MoveTo(i + istep, 0)
+     Paint.LineTo(i + istep, 1)
+     Paint.stroke
+  Next
+  Paint.end
+  
+End
 
 
 
@@ -106,7 +123,7 @@ Public Sub DrawCurve(pts As String[], c As Integer)
   one = 1
   Paint.NewPath()
   Paint.LineWidth = 0.003
-  Paint.Brush = Paint.Color(c) 
+  Paint.brush = Paint.color(Color.SetAlpha(C, 128))
   Try Paint.MoveTo(0, (one - CFloat(pts[0])) * 100)
   If Error Then Return
   For x = 1 To pts.max
@@ -128,13 +145,14 @@ End
 Public Sub UpdateMark(mx As Integer, pts As String[], mark As Object)
   Dim x, xScaled, yScaled, mouseX As Integer
   Dim y As Float
-  
+  Dim dest As Object
 'Return
   MouseX = mx
   If MouseX > DrawingArea1.w Then MouseX = DrawingArea1.w 
   If mx < 0 Then MouseX = 0
   x = MouseX
   xScaled = CInt(MouseX / (DrawingArea1.w / pts.max))
+
   Try y = 1 - pts[xScaled]
   'If Error Then Return
   yScaled = CInt(y * DrawingArea1.h)
@@ -143,14 +161,12 @@ Public Sub UpdateMark(mx As Integer, pts As String[], mark As Object)
 
 Select Case mark.name
   Case "RMark"
-    Try rCheck.text = "R: " & xScaled & " : " & pts[xScaled]
+    Try rCheck.text = "R: " & xScaled & " : " & Round(pts[xScaled], -2) & " : " & Round(255 * MouseX / (DrawingArea1.w), 0)
   Case "GMark"
-    Try gCheck.text = "G: " & xScaled & " : " & pts[xScaled]
+    Try gCheck.text = "G: " & xScaled & " : " & Round(pts[xScaled], -2) & " : " & Round(255 * MouseX / (DrawingArea1.w), 0)
   Case "BMark"
-    Try bCheck.text = "B: " & xScaled & " : " & pts[xScaled]
-End Select
-
-
+    Try bCheck.text = "B: " & xScaled & " : " & Round(pts[xScaled], -2) & " : " & Round(255 * MouseX / (DrawingArea1.w), 0)
+  End Select
 End
 
 
@@ -160,6 +176,11 @@ Public Sub RGBCheck_Click()
   Gmark.visible = GCheck.value
   Bmark.visible = BCheck.value
   DrawingArea1.Refresh
+  Object.Lock(form1)
+  Form1.CheckBoxR.value = RCheck.value
+  Form1.CheckBoxg.value = gCheck.value
+  Form1.CheckBoxb.value = bCheck.value
+  Object.Unlock(form1)
 End
 
 
@@ -169,7 +190,7 @@ Public Function Gaussianpoint(x As Float, omega As Float, m As Float, k As Float
 ' omega = inverso altezza picco gaussiana
 ' m = centro gaussiana; se la metti uguale al numero di punti / 2, la centri sulla serie.
 ' k = larghezza gaussiana, usa valori molto grandi, tipo 2000
-  Return CFloat((1 / (Sqr(2 * Pi * omega * omega)) * Exp(-1 / k * (((x - m) * (x - m)) / omega * omega))))
+  Try Return CFloat((1 / (Sqr(2 * Pi * omega * omega)) * Exp(-1 / k * (((x - m) * (x - m)) / omega * omega))))
 End
 
 Public Sub Gaussian(ByRef pts As String[], lp As Integer, hp As Integer, cp As Integer, w As Float, h As Float)
@@ -194,14 +215,6 @@ End
 
 
 
-' 
-
-
-
-
-
-
-
 Public Sub SaveUndo()
   Dim i As Integer
   Dim r, g, b As String
@@ -210,21 +223,42 @@ Public Sub SaveUndo()
     g = g & gpts[i] & " "
     b = b & bpts[i] & " "
   Next
-  UndoRedo.Push(R & "|" & G & "|" & B)
+  UndoRedo.Push(R & "|" & G & "|" & B & "|" & lastaction)
   Undoindex += 1
+  Update_undo_display()
 End
+
+
+Public Sub Update_undo_display()
+  Dim i As Integer
+  Dim t, action As String
+  Form1.TextArea1.clear
+  For i = 0 To UndoRedo.count - 1
+    Try action = Split(UndoRedo[i], "|", "", True)[3] 
+    If Error Then action = "No action"
+    If i = undoindex Then action = "* " & action
+    t &= action & "\n"
+  Next
+  Form1.textarea1.Text = t
+End
+
 
 Public UndoIndex As Integer = -1
 
 Public Sub ButtonUndo_Click()
   If undoindex = 0 Then Return
   Undoindex -= 1
-  rpts = Split(Split(Undoredo[Undoindex], "|")[0], " ", "", True)
-  gpts = Split(Split(Undoredo[Undoindex], "|")[1], " ", "", True)
-  bpts = Split(Split(Undoredo[Undoindex], "|")[2], " ", "", True)
+  undopts()
   DrawingArea1.Refresh
   WriteCalFile(tmpfile)
   ApplyCalFile(tmpfile)
+  Update_undo_display()
+End
+
+Public Sub undopts()
+  rpts = Split(Split(Undoredo[Undoindex], "|")[0], " ", "", True)
+  gpts = Split(Split(Undoredo[Undoindex], "|")[1], " ", "", True)
+  bpts = Split(Split(Undoredo[Undoindex], "|")[2], " ", "", True)
 End
 
 
@@ -237,6 +271,7 @@ Public Sub ButtonRedo_Click()
   DrawingArea1.Refresh
   WriteCalFile(tmpfile)
   ApplyCalFile(tmpfile)
+  Update_undo_display()
 End
 
 
@@ -260,6 +295,7 @@ Public Sub ButtonClear1_Click()
   WriteCalFile(tmpfile)
   ApplyCalFile(tmpfile)
   DrawingArea1.Refresh
+  lastaction = "Clear red"
   SaveUndo()
 End
 
@@ -268,6 +304,7 @@ Public Sub ButtonClear3_Click()
   WriteCalFile(tmpfile)
   ApplyCalFile(tmpfile)
   DrawingArea1.Refresh
+  lastaction = "Clear green"
   SaveUndo()
 End
 
@@ -276,66 +313,66 @@ Public Sub ButtonClear2_Click()
   WriteCalFile(tmpfile)
   ApplyCalFile(tmpfile)
   DrawingArea1.Refresh
+  lastaction = "Clear blue"
   SaveUndo()
 End
 
 
-
- Public Sub DrawingArea1_MouseMove()
-     UpdateMarks()
-'     
-'     
-    If Mouse.Left Then
-'   
-     rpts = oldrpts.Copy()
-     gpts = oldgpts.Copy()
-     bpts = oldbpts.Copy()
-'    
+Public Sub DrawingArea1_MouseMove()
+  UpdateMarks()    
+  If Mouse.Left Then
      lastheight = - ((Mouse.y - LastMouseY) / DrawingArea1.h) 
      lastwidth = ((Mouse.x - lastmouseX) * (DrawingArea1.w / rpts.max) * 3)
      If lastwidth <= 0 Then lastwidth = 1
-'   
      LastY = 1 - (Mouse.y / (DrawingArea1.w))
-'   
-     oldrpts = rpts.Copy()
-     oldgpts = gpts.Copy()
-     oldbpts = bpts.Copy()
-'     
-    Select combobox1.text
-      Case "Gaussian"
-        If RCheck.value Then Gaussian(rpts, 0, rpts.max, LastX, lastwidth, lastheight)
-        If GCheck.value Then Gaussian(gpts, 0, rpts.max, LastX, lastwidth, lastheight)
-        If BCheck.value Then Gaussian(bpts, 0, rpts.max, LastX, lastwidth, lastheight)
-      Case "Wide Gaussian"
-        If RCheck.value Then Gaussian(rpts, 0, rpts.max, LastX, lastwidth * 300, lastheight)
-        If GCheck.value Then Gaussian(gpts, 0, rpts.max, LastX, lastwidth * 300, lastheight)
-        If BCheck.value Then Gaussian(bpts, 0, rpts.max, LastX, lastwidth * 300, lastheight)
-      Case "Translate"
-        If RCheck.value Then Translate(rpts, 0, rpts.max, lastheight)
-        If GCheck.value Then Translate(gpts, 0, rpts.max, lastheight)
-        If BCheck.value Then Translate(bpts, 0, rpts.max, lastheight)
-      Case "Derivative"
-        If RCheck.value Then Derivative(rpts, 0, rpts.max, lastheight)
-        If GCheck.value Then Derivative(gpts, 0, rpts.max, lastheight)
-        If BCheck.value Then Derivative(bpts, 0, rpts.max, lastheight)
-      Case "Derivative (Inv)"
-        If RCheck.value Then InvDerivative(rpts, 0, rpts.max, lastheight)
-        If GCheck.value Then InvDerivative(gpts, 0, rpts.max, lastheight)
-        If BCheck.value Then InvDerivative(bpts, 0, rpts.max, lastheight)
-      Case "Gamma"
-        If RCheck.value Then Gamma(rpts, 0, rpts.max, lastheight)
-        If GCheck.value Then Gamma(gpts, 0, rpts.max, lastheight)
-        If BCheck.value Then Gamma(bpts, 0, rpts.max, lastheight)
-    End Select
-'   
-'   
-'   
-    DrawingArea1.Refresh
-      WriteCalFile("/tmp/calfile")
-      ApplyCalFile("/tmp/calfile")
+     ApplyOperator(combobox1.text, 0, rpts.max, LastX, lastwidth, lastheight)
   Endif
-
 End
+
+
+Public Sub ApplyOperator(operator As String, iStart As Integer, iEnd As Integer, center As Integer, width As Integer, power As Float)
+  Try rpts = oldrpts.Copy()
+  Try gpts = oldgpts.Copy()
+  Try bpts = oldbpts.Copy()
+  Select operator
+      Case "Gaussian"
+        If RCheck.value Then Gaussian(rpts, iStart, iEnd, center, width, power)
+        If GCheck.value Then Gaussian(gpts, iStart, iEnd, center, width, power)
+        If BCheck.value Then Gaussian(bpts, iStart, iEnd, center, width, power)
+      Case "Wide Gaussian"
+        If RCheck.value Then Gaussian(rpts, iStart, iEnd, center, width * 300, power)
+        If GCheck.value Then Gaussian(gpts, iStart, iEnd, center, width * 300, power)
+        If BCheck.value Then Gaussian(bpts, iStart, iEnd, center, width * 300, power)
+      Case "Translate"
+        If RCheck.value Then Translate(rpts, iStart, iEnd, power)
+        If GCheck.value Then Translate(gpts, iStart, iEnd, power)
+        If BCheck.value Then Translate(bpts, iStart, iEnd, power)
+      Case "Derivative"
+        If RCheck.value Then Derivative(rpts, iStart, iEnd, power)
+        If GCheck.value Then Derivative(gpts, iStart, iEnd, power)
+        If BCheck.value Then Derivative(bpts, iStart, iEnd, power)
+      Case "Derivative (Inv)"
+        If RCheck.value Then InvDerivative(rpts, iStart, iEnd, power)
+        If GCheck.value Then InvDerivative(gpts, iStart, iEnd, power)
+        If BCheck.value Then InvDerivative(bpts, iStart, iEnd, power)
+      Case "Gamma"
+        If RCheck.value Then Gamma(rpts, iStart, iEnd, power)
+        If GCheck.value Then Gamma(gpts, iStart, iEnd, power)
+        If BCheck.value Then Gamma(bpts, iStart, iEnd, power)
+  End Select
+  DrawingArea1.Refresh
+  lastaction = Operator & " "
+  lastaction &= "R:" & RCheck.value & " "
+  lastaction &= "G:" & GCheck.value & " " 
+  lastaction &= "B:" & bcheck.value & " "
+  lastaction &= "C:" & center & " "
+  lastaction &= "W:" & width & " "
+  lastaction &= "P:" & power & " "
+  WriteCalFile("/tmp/calfile")
+  ApplyCalFile("/tmp/calfile")
+End
+
+
 
 Public Sub Form_Open()
   Shell "dispwin -d " & Display() & " -s " & "/tmp/calfile" Wait
@@ -372,9 +409,9 @@ Public Lastheight As Float = 0
 
 
 Public Sub DrawingArea1_MouseDown()
-  LastX = CInt(Mouse.x / (DrawingArea1.w / rpts.max))
-  LastMouseY = Mouse.y
-  LastMousex = Mouse.x
+  Try LastX = CInt(Mouse.x / (DrawingArea1.w / rpts.max))
+  Try LastMouseY = Mouse.y
+  Try LastMousex = Mouse.x
   oldrpts = rpts.Copy()
   oldgpts = gpts.Copy()
   oldbpts = bpts.Copy()
@@ -414,7 +451,9 @@ End
 Public Sub Gamma(ByRef pts As String[], mmin As Integer, mmax As Integer, h As Float)
   Dim x As Integer
   Dim newh As Float = - h
+  If h = 0 Then Return
   For x = mmin To mmax
+        If pts[x] Like "*inf.0*" Then pts[x] = 0
         pts[x] = pts[x] * (((x / mmax) ^ newh))
         If pts[x] Like "NaN" Then pts[x] = 0
   Next
@@ -449,18 +488,30 @@ End
 Public Sub ButtonLoad_Click()
   If Dialog.path = "" Then Dialog.path = User.home
   If Not (Dialog.openfile()) Then
+    
+  FMain.DrawingArea1_MouseDown()
+
+
+
+  lastaction = "load " & Dialog.path
+
+
+
     ApplyCalFile(Dialog.path)
     ParseCalFile(Dialog.path)
     drawingarea1.Refresh
+    
+      FMain.DrawingArea1_MouseUp()    
+    
   Endif
 End
 
 Public Sub ButtonSave_Click()
-Stop
-  If Dialog.path = "" Then Dialog.path = User.home
+If Dialog.path = "" Then Dialog.path = User.home & "/"
   If Not (Dialog.SaveFile()) Then
     Try WriteCalFile(Dialog.Path)
     If Error Then Message.Error(("Error saving the cal file"))
+    Try File.Save(Dialog.path & ".log.txt", form1.TextArea1.text)
   Endif
 End
 
@@ -489,4 +540,33 @@ Public Sub buttonshide_Click()
 
   drawingarea1.Refresh
 
+End
+
+Public Sub Button2_Click()
+  Form1.show
+End
+
+
+Public Sub ComboBox1_Click()
+  Form1.combobox1.text = combobox1.text
+End
+
+Public Sub Form_Close()
+
+  Form1.close
+
+End
+
+Public Sub DrawingArea1_MouseWheel()
+
+  If Mouse.Delta > 0 Then
+    shades = shades * 2
+    If shades > 256 Then shades = 256
+      Else
+    shades = shades Div 2
+    If shades < 2 Then shades = 2
+  Endif
+  drawingarea1.Refresh
+  
+  
 End

@@ -17,15 +17,15 @@
       Focus = True
       { RMark PictureBox
         MoveScaled(9,10,1.1429,1.1429)
-        Background = &HFF0000&
+        Background = &H80FF0000&
       }
       { BMark PictureBox
         MoveScaled(14,17,1.1429,1.1429)
-        Background = &H0000FF&
+        Background = &H800000FF&
       }
       { GMark PictureBox
         MoveScaled(18,27,1.1429,1.1429)
-        Background = &H00FF00&
+        Background = &H8000FF00&
       }
     }
   }
@@ -38,7 +38,7 @@
       MoveScaled(0,0,39,10)
       Arrangement = Arrange.Vertical
       { ComboBox1 ComboBox
-        MoveScaled(0,0,33,4)
+        MoveScaled(0,0,27,4)
         Foreground = &H000000&
         ReadOnly = True
         List = [("Gaussian"), ("Wide Gaussian"), ("Translate"), ("Derivative"), ("Derivative (Inv)"), ("Gamma")]
@@ -57,7 +57,7 @@
           Border = False
         }
         { ButtonUndo Button
-          MoveScaled(7,0,7,6)
+          MoveScaled(5,0,7,6)
           Background = &H000000&
           ToolTip = ("Undo")
           Expand = True
@@ -65,7 +65,7 @@
           Border = False
         }
         { ButtonRedo Button
-          MoveScaled(12,0,7,6)
+          MoveScaled(10,0,7,6)
           Background = &H000000&
           ToolTip = ("Redo")
           Expand = True
@@ -73,7 +73,7 @@
           Border = False
         }
         { ButtonLoad Button
-          MoveScaled(18,0,7,6)
+          MoveScaled(15,0,7,6)
           Background = &H00FF00&
           ToolTip = ("Load")
           Expand = True
@@ -81,7 +81,7 @@
           Border = False
         }
         { ButtonSave Button
-          MoveScaled(25,0,7,6)
+          MoveScaled(21,0,7,6)
           Background = &H000000&
           ToolTip = ("Save")
           Expand = True
@@ -89,12 +89,16 @@
           Border = False
         }
         { ButtonSave2 Button
-          MoveScaled(31,0,7,6)
+          MoveScaled(26,0,7,6)
           Background = &H000000&
           ToolTip = ("Save")
           Expand = True
           Picture = Picture["stock_fullscreen.png"]
           Border = False
+        }
+        { Button2 Button
+          MoveScaled(32,1,5,5)
+          Picture = Picture["icon:/16/keyboard"]
         }
       }
     }
@@ -146,7 +150,8 @@
           Name = "RCheck"
           MoveScaled(10,0,11,1)
           Font = Font["Bold,-2"]
-          Foreground = &HFF0000&
+          Foreground = &HFFE1E1&
+          ToolTip = ("Enable/Disable ")
           AutoResize = True
           Text = ("Red")
           Value = CheckBox.True
@@ -173,7 +178,8 @@
           Name = "GCheck"
           MoveScaled(10,0,11,2)
           Font = Font["Bold,-2"]
-          Foreground = &H00FF00&
+          Foreground = &HE1FFE1&
+          ToolTip = ("Enable/Disable ")
           AutoResize = True
           Text = ("Green")
           Value = CheckBox.True
@@ -200,7 +206,8 @@
           Name = "BCheck"
           MoveScaled(10,0,11,1)
           Font = Font["Bold,-2"]
-          Foreground = &H0000FF&
+          Foreground = &HE1E1FF&
+          ToolTip = ("Enable/Disable ")
           AutoResize = True
           Text = ("Blue")
           Value = CheckBox.True

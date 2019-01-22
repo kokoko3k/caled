@@ -1,0 +1,57 @@
+' Gambas class file
+
+
+Public Sub values_Change()
+  If checkbox1.value Then 
+    FMain.undopts()
+    apply
+  Endif
+End
+
+Public Sub Button1_Click()
+  FMain.DrawingArea1_MouseDown()
+  apply
+  FMain.DrawingArea1_MouseUp()
+End
+
+Public Sub apply()
+  Dim center As Integer = spinbox1.Value
+  Dim power As Float = spinbox2.value / 1000
+  Dim width As Integer = spinbox3.value
+  FMain.ApplyOperator(FMain.ComboBox1.text, 0, FMain.Rpts.max, center, width, power)
+End
+
+
+Public Sub Button2_Click()
+  FMain.ButtonUndo_click()
+End
+
+
+Public Sub CheckBoxR_Click()
+  Dim dest As Object = FMain.rcheck
+  dest.value = Last.value 
+End
+
+Public Sub CheckBoxG_Click()
+  Dim dest As Object = FMain.gcheck
+  dest.value = Last.value 
+End
+
+Public Sub CheckBoxB_Click()
+  Dim dest As Object = FMain.bcheck
+  dest.value = Last.value 
+End
+
+Public Sub Form_open()
+  Dim i As Integer
+  For i = 0 To FMain.ComboBox1.List.count - 1
+    Form1.ComboBox1.Add(FMain.ComboBox1.List[i])
+  Next
+  Form1.combobox1.text = combobox1.text
+End
+
+Public Sub ComboBox1_click()
+
+  FMain.combobox1.text = Last.text
+
+End
