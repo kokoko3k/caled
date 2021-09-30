@@ -321,7 +321,7 @@ End
 Public Sub DrawingArea1_MouseMove()
   UpdateMarks()    
   If Mouse.Left Then
-     lastheight = - ((Mouse.y - LastMouseY) / DrawingArea1.h) 
+     lastheight = -((Mouse.y - LastMouseY) / DrawingArea1.h) 
      lastwidth = ((Mouse.x - lastmouseX) * (DrawingArea1.w / rpts.max) * 3)
      If lastwidth <= 0 Then lastwidth = 1
      LastY = 1 - (Mouse.y / (DrawingArea1.w))
@@ -450,7 +450,7 @@ End
 
 Public Sub Gamma(ByRef pts As String[], mmin As Integer, mmax As Integer, h As Float)
   Dim x As Integer
-  Dim newh As Float = - h
+  Dim newh As Float = -h
   If h = 0 Then Return
   For x = mmin To mmax
         If pts[x] Like "*inf.0*" Then pts[x] = 0

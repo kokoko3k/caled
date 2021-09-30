@@ -511,6 +511,7 @@ If Dialog.path = "" Then Dialog.path = User.home & "/"
   If Not (Dialog.SaveFile()) Then
     Try WriteCalFile(Dialog.Path)
     If Error Then Message.Error(("Error saving the cal file"))
+    Try File.Save(Dialog.path & ".log.txt", form1.TextArea1.text)
   Endif
 End
 

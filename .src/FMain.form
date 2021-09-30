@@ -150,7 +150,7 @@
           Name = "RCheck"
           MoveScaled(10,0,11,1)
           Font = Font["Bold,-2"]
-          Foreground = &HFFE1E1&
+          Foreground = &HC00000&
           ToolTip = ("Enable/Disable ")
           AutoResize = True
           Text = ("Red")
@@ -178,7 +178,7 @@
           Name = "GCheck"
           MoveScaled(10,0,11,2)
           Font = Font["Bold,-2"]
-          Foreground = &HE1FFE1&
+          Foreground = &H00A000&
           ToolTip = ("Enable/Disable ")
           AutoResize = True
           Text = ("Green")
@@ -206,7 +206,7 @@
           Name = "BCheck"
           MoveScaled(10,0,11,1)
           Font = Font["Bold,-2"]
-          Foreground = &HE1E1FF&
+          Foreground = &H4949FF&
           ToolTip = ("Enable/Disable ")
           AutoResize = True
           Text = ("Blue")

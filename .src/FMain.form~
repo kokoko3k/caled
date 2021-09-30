@@ -11,7 +11,7 @@
     Expand = True
     Arrangement = Arrange.Horizontal
     { DrawingArea1 DrawingArea
-      MoveScaled(3,4,72,58)
+      MoveScaled(4,5,72,58)
       Tracking = True
       Expand = True
       Focus = True
